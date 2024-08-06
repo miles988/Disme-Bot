@@ -1,11 +1,11 @@
 module.exports.config = {
-	name: "thread",
+	name: "مجموعه",
 	version: "1.0.5",
 	hasPermssion: 2,
-	credits: "Mirai Team",
-	description: "Cấm hoặc gỡ cấm nhóm",
-	commandCategory: "Admin",
-	usages: "[unban/ban/search] [ID or text]",
+	credits: "عمر",
+	description: "حضر او الغاء حضر عن المجموعات",
+	commandCategory: "المطور",
+	usages: "[نوبان/باند/بحث] [تايد]\n مجموعه لاست : لأضهار قائمة المجموعات المحضورة\n مجموعه باند : لحضر مجموعة \n مجموعه امرباند : لالغاء الحضر عن المجموعة  \n مجموعه امرنوبان : حتى تحضر امر عن مجموعة \n مجموعه معلومات : حتى تلغي حضر امر عن مجموعة  ",
 	cooldowns: 5,
 	dependencies: {
 		"moment-timezone": ""
@@ -40,27 +40,27 @@ module.exports.languages = {
 		"returnInfo": "[ Info Thread ] Đây là một sô thông tin về nhóm bạn cần tìm:\n- ID của nhóm: %1n- Có bị ban?: %2 %3 %4\n- Bị ban lệnh?: %5"
 	},
 	"en": {
-		"reason": "Reason",
+		"reason": "السبب ",
 		"at": "At",
 		"allCommand": "All commands",
 		"commandList": "Commands",
-		"banSuccess": "[ Ban Thread ] Banned thread has  ID %1",
-		"unbanSuccess": "[ Unban Thread ] Unbanned thread has ID %1",
-		"banCommandSuccess": "[ banCommand Thread ] Banned command with thread has  ID %1",
+		"banSuccess": "[ Ban Thread ] الكروب المحظور له معرف %1",
+		"unbanSuccess": "[ الغاء حضر ] تم الغاء الحضر عن المجموعة , الايدي : %1",
+		"banCommandSuccess": "[ banCommand Thread ] تم حضر الامر عن الكروب , ايدي الكروب : %1",
 		"unbanCommandSuccess": "[ unbanCommand Thread ] Unbanned %1 with thread has ID %2",
 		"errorReponse": "%1 Can't do what you request with thread has ID %2",
-		"IDNotFound": "%1 ID you import doesn't exist in database",
-		"existBan": "[ Ban Thread ] ID %1 has been banned before %2 %3",
-		"notExistBan": "[ Unban Thread ] ID you import hasn't been banned before bot",
-		"missingCommandInput": "%1 You have to import the command you want to ban!",
-		"notExistBanCommand": "[ UnbanCommand Thread ] The thread ID you import hasn't been banned before",
+		"IDNotFound": "%1 الايدي اللي دخلته مموجود بقاعدة البيانات",
+		"existBan": "[ Ban Thread ] المجموعة  %1 تم حضرها من قبل %2 %3",
+		"notExistBan": "هذه المجموعة غير محضورة",
+		"missingCommandInput": "%1 يجب عليك ادحال الامر اللذي تريد حضره عن المجموعه  !",
+		"notExistBanCommand": "[ UnbanCommand Thread ] هاي المجموعة ممحضورة قبل",
 
-		"returnBan": "[ Ban Thread ] You are requesting to ban thread:\n- Thread ID: %1%2\n\n❮ Reaction this message to complete ❯",
-		"returnUnban": "[ Unban Thread ] You are requesting to unban thread:\n- Thread ID: %1\n\n❮ Reaction this message to complete ❯",
-		"returnBanCommand": "[ banCommand Thread ] You are requesting to ban command with thread:\n - Thread ID: %1\n- Commands: %2\n\n❮ Reaction this message to complete ❯",
-		"returnUnbanCommand": "[ unbanCommand Thread ] You are requesting to unban command with thread:\n - Thread ID: %1\n- Commands: %2\n\n❮ Reaction this message to complete ❯",
+		"returnBan": "[ حضر مجموعة ] انت تطلب حضر المجموعة :\n-  ايدي المجموعة : %1%2\n\n❮ تفاعل على هذه الرسالة لآكمال الطلب ❯",
+		"returnUnban": "[ الغاء حضر ] انت تطلب الغاء الحضر عن المجموعة :\n- ايدي المجموعة : %1\n\n❮ تفاعل على هذه الرسالة لآكمال الطلب ❯",
+		"returnBanCommand": "[ banCommand Thread ] انت تطلب حضر أمر عن المجموعة :\n - ايدي المجموعة : %1\n- الامر : %2\n\n❮ تفاعل على هذه الرسالة لآكمال الطلب ❯",
+		"returnUnbanCommand": "[ unbanCommand Thread ] انت تطلب فك حضر الامر عن المجموعة :\n - ايدي المجموعة : %1\n- الامر : %2\n\n❮ تفاعل على هذه الرسالة لآكمال الطلب ❯",
 	
-		"returnResult": "This is your result: \n",
+		"returnResult": "هذه هي النتيجة : \n",
 		"returnNull": "There is no result with your input!",
 		"returnList": "[ Thread List ]\There are %1 banned thread, here are %2\n\n%3",
 		"returnInfo": "[ Info Thread ] Here are some information about your thread which you want to search:\n- Thread ID: %1n- Banned?: %2 %3 %4\n- Command banned?: %5"
@@ -72,8 +72,8 @@ module.exports.handleReaction = async ({ event, api, Threads, handleReaction, ge
 	const moment = require("moment-timezone");
 	const { threadID } = event;
 	const { messageID, type, targetID, reason, commandNeedBan } = handleReaction;
-	
-	const time = moment.tz("Asia/Ho_Chi_minh").format("HH:MM:ss L");
+
+	const time = moment.tz("Asia/Baghdad").format("HH:MM:ss L");
 	global.client.handleReaction.splice(global.client.handleReaction.findIndex(item => item.messageID == messageID), 1);
 
 	switch (type) {
@@ -145,7 +145,7 @@ module.exports.run = async ({ event, api, args, Threads, getText }) => {
 	}
 
 	switch (args[0]) {
-		case "ban":
+		case "باند":
 		case "-b": {
 			if (!global.data.allThreadID.includes(targetID)) return api.sendMessage(getText("IDNotFound", "[ Ban Thread ]"), threadID, messageID);
 			if (global.data.threadBanned.has(targetID)) {
@@ -165,7 +165,7 @@ module.exports.run = async ({ event, api, args, Threads, getText }) => {
 			}, messageID);
 		}
 
-		case "unban":
+		case "نوبان":
 		case "-ub": {
 			if (!global.data.allThreadID.includes(targetID)) return api.sendMessage(getText("IDNotFound", "[ Unban Thread ]"), threadID, messageID);
 			if (!global.data.threadBanned.has(targetID)) return api.sendMessage(getText("notExistBan"), threadID, messageID);
@@ -181,7 +181,7 @@ module.exports.run = async ({ event, api, args, Threads, getText }) => {
 			}, messageID);
 		}
 
-		case "banCommand":
+		case "امرباند":
 		case "-bc": {
 			if (!global.data.allThreadID.includes(targetID)) return api.sendMessage(getText("IDNotFound", "[ BanCommand Thread ]"), threadID, messageID);
 			if (reason == null || reason.length == 0) return api.sendMessage(getText("missingCommandInput", '[ BanCommand Thread ]'), threadID, messageID);
@@ -205,7 +205,7 @@ module.exports.run = async ({ event, api, args, Threads, getText }) => {
 			}, messageID);
 		}
 
-		case "unbanCommand":
+		case "امرنوبان":
 		case "-ubc": {
 			if (!global.data.allThreadID.includes(targetID)) return api.sendMessage(getText("IDNotFound", "[ UnbanCommand Thread ]"), threadID, messageID);
 			if (!global.data.commandBanned.has(targetID)) return api.sendMessage(getText("notExistBanCommand"), threadID, messageID);
@@ -227,7 +227,7 @@ module.exports.run = async ({ event, api, args, Threads, getText }) => {
 			}, messageID);
 		}
 
-		case "search":
+		case "بحث":
 		case "-s": {
 			const contentJoin = reason || "";
 			const getThreads =  (await Threads.getAll(['threadID', 'threadInfo'])).filter(item => !!item.threadInfo);
@@ -245,7 +245,7 @@ module.exports.run = async ({ event, api, args, Threads, getText }) => {
 			break;
 		}
 
-		case "list":
+		case "لاست":
 		case "-l": {
 			var listBan = [], i = 0;
 			const threadData = global.data.threadBanned.keys();
@@ -261,7 +261,7 @@ module.exports.run = async ({ event, api, args, Threads, getText }) => {
 			return api.sendMessage(getText("returnList",(global.data.threadBanned.size || 0), listBan.length, listBan.join("\n")), threadID, messageID);
 		}
 
-		case "info":
+		case "معلومات":
 		case "-i": {
 			if (!global.data.allThreadID.includes(targetID)) return api.sendMessage(getText("IDNotFound", "[ Info Thread ]"), threadID, messageID);
 			if (global.data.commandBanned.has(targetID)) { var commandBanned = global.data.commandBanned.get(targetID) || [] };
